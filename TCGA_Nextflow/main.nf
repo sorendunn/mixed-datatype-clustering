@@ -60,6 +60,29 @@ process RunPythonScript {
     """
 }
 
+process MergeResults {
+    label 'python'
+    publishDir 'results', mode: 'copy'
+
+    input:
+        tuple val(hyperparam), val(distance_type), val(cluster)
+        file("${params.subdirectory_name}/binary_numerical_merged.csv")
+
+    output: 
+        file('results/*.csv')
+    
+    script:
+    """
+    python3 ${baseDir}/${params.py_script} \
+    ${hyperparam} \
+    ${distance_type} \
+    ${cluster} \
+    "${params.subdirectory_name}/binary_numerical_merged.csv"
+    """
+}
+
+process CompareClusters
+
 // Create a channel with the combinations of parameters
 combinations = Channel.from(params.hyperparams)
                       .combine(Channel.from(params.distance_types))

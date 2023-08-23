@@ -6,8 +6,4 @@ channels:
 dependencies:
   - r-base=4.1.0
   - r-devtools
-  - bioconductor-biocmanager
-  - bioconductor-genomicdatacommons
-  - bioconductor-maftools
-  - bioconductor-TCGAbiolinks
   - r-data.table
